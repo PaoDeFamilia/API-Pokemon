@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CLMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:foregroundTint="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <com.example.apipokemon.CustomView
+        android:id="@+id/customView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <ImageView
+        android:id="@+id/imgPokemon"
+        android:layout_width="302dp"
+        android:layout_height="90dp"
+        android:contentDescription="@string/imgPokeContDesc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024"
+        app:srcCompat="@drawable/pokemon" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="330dp"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgPokemon"
+        app:layout_constraintVertical_bias="0.19999999">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/pokeInput"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:autofillHints="@string/hintidname"
+                android:backgroundTint="@color/primary_2"
+                android:ems="10"
+                android:hint="@string/hintidname"
+                android:inputType="textPersonName"
+                android:textColorHighlight="@color/primary_2"
+                android:textColorLink="@color/primary_1" />
+
+            <ImageButton
+                android:id="@+id/btnBusca"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/primary_1"
+                android:backgroundTintMode="src_in"
+                android:contentDescription="@string/imgbtnBuscaContDesc"
+                android:onClick="buscaPoke"
+                android:scaleType="centerCrop"
+                android:tint="@color/ic_launcher_background"
+                android:tintMode="src_in"
+                app:srcCompat="@android:drawable/ic_menu_search" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtSpace1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtPokeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/txtPokeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtSpace2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtPokeHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/txtPokeWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtSpace3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSalvar"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:onClick="Salvar"
+                android:paddingHorizontal="4dp"
+                android:text="@string/btnSalvar"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnApagar"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="10dp"
+                android:onClick="Deletar"
+                android:paddingHorizontal="4dp"
+                android:text="@string/btnApagar"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnVer"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:onClick="Listar"
+                android:paddingHorizontal="0dp"
+                android:text="@string/btnVer"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtSpace4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/textview_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_location"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/secondary_2"
+        android:paddingHorizontal="4dp"
+        android:text="@string/start_tracking_location"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.39" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">API pokemon</string>
+    <string name="hintidname">Nome ou número</string>
+    <string name="imgPokeContDesc">pokemon logo</string>
+    <string name="imgbtnBuscaContDesc">icone de busca</string>
+    <string name="imgbtnLocalContDesc">icone de local</string>
+    <string name="btnSalvar">Capturar Pokémon</string>
+    <string name="btnApagar">Soltar Pokémon</string>
+    <string name="btnVer">Ver Capturas</string>
+
+    <string name="loading">Carregando…</string>
+    <string name="no_results">Nenhum resultado encontrado</string>
+    <string name="no_search_term">Informe um termo de busca</string>
+    <string name="no_network">Verifique sua conexão</string>
+    <string name="str_empty">""</string>
+
+    <string name="get_location">Obter Localização</string>
+    <string name="textview_hint">""</string>
+    <string name="location_permission_denied">Permissão negada, autorize a aplicação</string>
+    <string name="address_text">"Endereço: %1$s  \n Latitude: %2$s \n Longitude: %3$s \n Horário: %4$tr"</string>
+
+    <string name="no_location">Localização Indisponível</string>
+    <string name="no_address_found">Endereço não disponível</string>
+    <string name="service_not_available">Serviço Indisponível</string>
+    <string name="invalid_lat_long_used">Coordenadas Inválidas</string>
+    <string name="start_tracking_location">Buscar localização</string>
+    <string name="stop_tracking_location">Parar Busca</string>
+
+</resources>
