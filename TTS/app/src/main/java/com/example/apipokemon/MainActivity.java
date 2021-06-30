@@ -51,24 +51,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public String pokeWeight;
 
     //localização
-    // Arquivo shared preferences
-    public static final String PREFERENCIAS_NAME = "com.example.android.localizacao";
     private static final String TRACKING_LOCATION_KEY = "tracking_location";
-    // Constantes
+
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    private static final String LATITUDE_KEY = "latitude";
-    private static final String LONGITUDE_KEY = "longitude";
-    // Views
+
     private Button mLocationButton;
     private TextView mLocationTextView;
-    private static final String LASTADRESS_KEY = "adress";
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
-    // private Location location;
-    // classes Location
+
     private boolean mTrackingLocation;
-    // Shared preferences
-    private SharedPreferences mPreferences;
+
     private String lastLatitude = "";
     private String lastLongitude = "";
     private String lastAdress = "";
@@ -83,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-
-        CustomView customView = new CustomView(this);
 
         pokeBusca = findViewById(R.id.pokeInput);
         nmPoke = findViewById(R.id.txtPokeName);
@@ -104,16 +95,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //localização
         mLocationButton = (Button) findViewById(R.id.button_location);
         mLocationTextView = (TextView) findViewById(R.id.textview_location);
-        // Inicializa FusedLocationClient.
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(
                 this);
-        // Recupera o estado da aplicação quando é recriado
+
         if (savedInstanceState != null) {
             mTrackingLocation = savedInstanceState.getBoolean(
                     TRACKING_LOCATION_KEY);
         }
 
-        // Listener do botão de localização.
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             /**
              * Toggle the tracking state.
@@ -130,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Inicializa os callbacks da locations.
+
         mLocationCallback = new LocationCallback() {
             /**
              * This is the callback that is triggered when the
@@ -139,18 +129,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
              */
             @Override
             public void onLocationResult(LocationResult locationResult) {
-                // If tracking is turned on, reverse geocode into an address
+
                 if (mTrackingLocation) {
                     new FetchAddressTask(MainActivity.this, MainActivity.this)
                             .execute(locationResult.getLastLocation());
                 }
             }
         };
-
-        //inicializa as preferências do usuário
-        mPreferences = getSharedPreferences(PREFERENCIAS_NAME, MODE_PRIVATE);
-        //recupera as preferencias
-        recuperar();
 
         mCustomView = (CustomView) findViewById(R.id.customView);
 
@@ -284,9 +269,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (mTrackingLocation) {
             stopTrackingLocation();
             mTrackingLocation = true;
-            armazenar(lastLatitude, lastLongitude, lastAdress);
         }
-//remove o listener ao pausar
+
         super.onPause();
         sensorManager.unregisterListener(this);
     }
@@ -296,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (mTrackingLocation) {
             startTrackingLocation();
         }
-        recuperar();
+
         super.onResume();
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
@@ -335,11 +319,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             mLocationCallback,
                             null /* Looper */);
 
-            // Set a loading text while you wait for the address to be
-            // returned
             mLocationTextView.setText(getString(R.string.address_text,
-                    getString(R.string.loading), null, null,
-                    System.currentTimeMillis()));
+                    getString(R.string.loading), null, null));
             mLocationButton.setText(R.string.stop_tracking_location);
         }
     }
@@ -369,15 +350,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     /**
-     * Salva a ultima localização
-     */
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(TRACKING_LOCATION_KEY, mTrackingLocation);
-        super.onSaveInstanceState(outState);
-    }
-
-    /**
      * Callback chamado com a resposta da request permission
      *
      * @param requestCode  Código da requisição
@@ -402,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-    //Método com a resposta da Fetch Adress Task
+
     @Override
     public void onTaskCompleted(String[] result) {
         if (mTrackingLocation) {
@@ -411,25 +383,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             lastLongitude = result[2];
             lastAdress = result[0];
             mLocationTextView.setText(getString(R.string.address_text,
-                    lastAdress, lastLatitude, lastLongitude, System.currentTimeMillis()));
+                    lastAdress, lastLatitude, lastLongitude));
         }
     }
 
-    //Armazena as preferencias do usuário
-    //na aplicação será armazenada a última localicação
 
-    private void armazenar(String latitude, String longitude, String lastAdress) {
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.putString(LATITUDE_KEY, latitude);
-        preferencesEditor.putString(LONGITUDE_KEY, longitude);
-        preferencesEditor.putString(LASTADRESS_KEY, lastAdress);
-        preferencesEditor.apply();
-    }
-
-    private void recuperar() {
-        lastLatitude = mPreferences.getString(LATITUDE_KEY, "");
-        lastLongitude = mPreferences.getString(LONGITUDE_KEY, "");
-        lastAdress = mPreferences.getString(LASTADRESS_KEY, "");
-    }
 }
 

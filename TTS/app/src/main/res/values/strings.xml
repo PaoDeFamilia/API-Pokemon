@@ -17,7 +17,7 @@
     <string name="get_location">Obter Localização</string>
     <string name="textview_hint">""</string>
     <string name="location_permission_denied">Permissão negada, autorize a aplicação</string>
-    <string name="address_text">"Endereço: %1$s  \n Latitude: %2$s \n Longitude: %3$s \n Horário: %4$tr"</string>
+    <string name="address_text">"Endereço: %1$s  \n Latitude: %2$s \n Longitude: %3$s"</string>
 
     <string name="no_location">Localização Indisponível</string>
     <string name="no_address_found">Endereço não disponível</string>
